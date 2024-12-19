@@ -1,6 +1,7 @@
 package src.com.mypackage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Rectangle;
 
 import java.util.List;
@@ -13,6 +14,10 @@ public class GameScreen extends AbstractScreen {
     private List<Bomb> bombs;
     private List<Coin> coins;
     private int coinsCollected;
+    private BitmapFont font;
+    private float timer = 30f;
+    private final float timeLimit = 0f;
+    private boolean gameLost = false;
 
     public GameScreen(MyGame game) {
         super(game);
@@ -21,10 +26,12 @@ public class GameScreen extends AbstractScreen {
         mapManager = new MapManager();
         player = new Player(mapManager);
         bombs = new ArrayList<>();
-        createBombs(10);
+        createBombs(20);
         coins = new ArrayList<>();
         createCoins(10);
-        cameraManager = new CameraManager(mapManager);
+        font = new BitmapFont();
+        font.getData().setScale(2.0f);
+        cameraManager = new CameraManager(mapManager, 640, 640);
 
     }
 
@@ -36,6 +43,14 @@ public class GameScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
+        if(!gameLost){
+            timer -= delta;
+            if(timer<timeLimit){
+                gameLost = true;
+                game.setScreen(new GameOverScreen(game));
+            }
+        }
+
         // Effacer l'écran
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -55,6 +70,8 @@ public class GameScreen extends AbstractScreen {
         for(Coin coin : coins){
             coin.render(batch);
         }
+        font.draw(batch, "Coins: "+coinsCollected, 10, 640 - 10);
+        font.draw(batch, "Temps restant : "+(int) timer+"s", 640-270, 640-10);
         batch.end();
     }
 
@@ -93,6 +110,14 @@ public class GameScreen extends AbstractScreen {
                         break;
                     }
                 }
+                // Vérifier si la bombe entre en collision avec d'autres bombes déjà crées
+                for(Bomb existingBomb : bombs){
+                    if(bomb.getBounds().overlaps(existingBomb.getBounds())){
+                        validPosition = false;
+                        break;
+                    }
+                }
+
             } while (!validPosition); // Répéter jusqu'à trouver une position valide
 
             bombs.add(bomb);

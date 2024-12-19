@@ -1,10 +1,20 @@
 package src.com.mypackage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class CameraManager extends AbstractCameraManager {
 
-    public CameraManager(MapManager mapManager) {
+    private Viewport viewport;
+
+    public CameraManager(MapManager mapManager, float virtualWidth, float virtualHeight) {
         super(mapManager);
-        camera.setToOrtho(false, mapWidth, mapHeight);
+        viewport = new FitViewport(virtualWidth, virtualHeight, camera);
+        camera.setToOrtho(false, virtualWidth, virtualHeight);
+    }
+
+    @Override
+    public  void resize(int width, int height){
+        viewport.update(width, height);
     }
 
     @Override
