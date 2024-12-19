@@ -1,0 +1,50 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "farming_fishing.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "mytiled.tmx": {
+            "scale": 0.8134374999999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.2458701498271,
+                "y": 320.2458701498271
+            }
+        },
+        "overworld_tileset_grass.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plowed_soil.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tallgrass.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/camar/OneDrive/Bureau/submission_daneeklu/tilesets",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 20,
+    "openFiles": [
+    ],
+    "project": "Mape.tiled-project",
+    "recentFiles": [
+        "mytiled.tmx",
+        "farming_fishing.tsx",
+        "plowed_soil.tsx",
+        "tallgrass.tsx",
+        "overworld_tileset_grass.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
